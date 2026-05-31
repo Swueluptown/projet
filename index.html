@@ -115,8 +115,8 @@ padding:25px 40px;
 .no{
     position:absolute;
 
-    left:520px;
-    top:280px;
+    left:420px;
+    top:120px;
 
     width:180px;
     height:80px;
@@ -340,35 +340,27 @@ nextPage(4);
 
 /* bouton non qui fuit */
 const btn = document.getElementById("noBtn");
-const card = document.querySelector(".card");
 
-function moveNoButton(){
+btn.addEventListener("mouseenter", () => {
 
-    const cardRect = card.getBoundingClientRect();
-
-    const padding = 30;
+    const parent = document.querySelector(".buttons");
 
     const maxX =
-        cardRect.width -
+        parent.clientWidth -
         btn.offsetWidth -
-        padding;
+        20;
 
     const maxY =
-        cardRect.height -
+        parent.clientHeight -
         btn.offsetHeight -
-        120;
+        20;
 
-    const newX =
-        padding +
-        Math.random() * (maxX - padding);
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-    const newY =
-        100 +
-        Math.random() * (maxY - 100);
-
-    btn.style.left = newX + "px";
-    btn.style.top = newY + "px";
-}
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+});
 
 btn.addEventListener("mouseenter", moveNoButton);
 
