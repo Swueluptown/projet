@@ -420,6 +420,10 @@ const y = 20 + Math.random() * (maxY - 20);
 
     btn.style.left = x + "px";
     btn.style.top = y + "px";
+
+    btn.addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    // même logique que mouseenter
 });
 
 </script>
