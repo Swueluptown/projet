@@ -121,20 +121,36 @@ padding:25px 40px;
     width:220px;
     height:80px;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
     border:none;
     border-radius:22px;
 
     background:white;
+    color:black;
+
     box-shadow:0 10px 25px rgba(0,0,0,.15);
 
     font-size:2rem;
     font-weight:bold;
+
+    cursor:pointer;
 
     transition:
         left .35s cubic-bezier(.22,1,.36,1),
         top .35s cubic-bezier(.22,1,.36,1);
 
     z-index:20;
+}
+
+.no::after{
+    content:"🍈";
+    font-size:1.3rem;
+    line-height:1;
+}
 }
 
 .hero{
@@ -257,12 +273,6 @@ line-height:2;
     transform:translateX(-50%);
 
     z-index:20;
-}
-    .no::after{
-    content:"🍈";
-    margin-left:8px;
-    font-size:1.2rem;
-    vertical-align:middle;
 }
 
     .cat,
@@ -446,22 +456,10 @@ function moveNo(){
     void btn.offsetWidth;
     btn.classList.add("flash");
 
-    const textes = [
-        "Non",
-        "T'es sûre ?",
-        "Mauvaise idée",
-        "Réessaie",
-        "🍈",
-        "Impossible"
-    ];
-
-    btn.innerHTML =
-        textes[Math.floor(Math.random()*textes.length)];
-
     const parent = document.querySelector(".buttons");
 
     const maxX = parent.clientWidth - btn.offsetWidth;
-  const maxY = parent.clientHeight - btn.offsetHeight;
+    const maxY = parent.clientHeight - btn.offsetHeight;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
