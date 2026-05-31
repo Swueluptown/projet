@@ -258,6 +258,12 @@ line-height:2;
 
     z-index:20;
 }
+    .no::after{
+    content:"🍈";
+    margin-left:8px;
+    font-size:1.2rem;
+    vertical-align:middle;
+}
 
     .cat,
     .star,
@@ -274,6 +280,27 @@ line-height:2;
     .choices{
         grid-template-columns:1fr;
     }
+}
+
+    @keyframes dangerFlash {
+
+    0%{
+        background:white;
+    }
+
+    50%{
+        background:#ff4d4d;
+        color:white;
+    }
+
+    100%{
+        background:white;
+        color:black;
+    }
+}
+
+.flash{
+    animation:dangerFlash .25s ease;
 }
 </style>
 </head>
@@ -304,7 +331,7 @@ Oui
 </button>
 
 <button class="btn no" id="noBtn">
-Non 🍈
+Non 
 </button>
 
 </div>
@@ -415,6 +442,12 @@ const btn = document.getElementById("noBtn");
 
 function moveNo(){
 
+    btn.classList.remove("flash");
+
+    void btn.offsetWidth;
+
+    btn.classList.add("flash");
+
     const parent = document.querySelector(".buttons");
 
     const maxX = parent.clientWidth - btn.offsetWidth;
@@ -436,6 +469,17 @@ btn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     moveNo();
 });
+
+    const textes = [
+    "Non",
+    "T'es sûre ?",
+    "Mauvaise idée",
+    "Réessaie",
+    "🍈",
+    "Impossible"
+];
+
+btn.innerHTML = textes[Math.floor(Math.random()*textes.length)];
 
 </script>
 
