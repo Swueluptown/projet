@@ -1,0 +1,351 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Date avec Gaëtan</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#e8dfff,#ffe9ef);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+}
+
+.card{
+width:100%;
+max-width:1000px;
+background:white;
+border-radius:30px;
+padding:40px;
+box-shadow:0 20px 60px rgba(0,0,0,.12);
+position:relative;
+overflow:hidden;
+}
+
+.page{
+display:none;
+}
+
+.active{
+display:block;
+animation:fade .5s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.progress{
+height:10px;
+background:#eee;
+border-radius:20px;
+margin-bottom:30px;
+overflow:hidden;
+}
+
+.progressBar{
+height:100%;
+width:25%;
+background:#6b46ff;
+transition:.4s;
+}
+
+h1{
+font-size:3rem;
+margin-bottom:20px;
+}
+
+.buttons{
+position:relative;
+height:260px;
+}
+
+.btn{
+border:none;
+cursor:pointer;
+font-size:2rem;
+border-radius:24px;
+padding:25px 40px;
+}
+
+.yes{
+background:#6b46ff;
+color:white;
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.yes img{
+width:50px;
+}
+
+.no{
+position:absolute;
+left:420px;
+top:0;
+width:230px;
+height:90px;
+font-weight:bold;
+background:white;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.hero{
+position:absolute;
+right:40px;
+top:80px;
+width:260px;
+}
+
+.choices{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.choice{
+padding:25px;
+border-radius:20px;
+border:2px solid #eee;
+cursor:pointer;
+font-size:1.3rem;
+transition:.25s;
+}
+
+.choice:hover{
+transform:translateY(-5px);
+border-color:#6b46ff;
+}
+
+.cat{
+position:absolute;
+top:20px;
+right:20px;
+width:120px;
+}
+
+.star{
+position:absolute;
+right:30px;
+top:120px;
+width:300px;
+}
+
+.fillon{
+position:absolute;
+right:10px;
+bottom:0;
+width:260px;
+}
+
+input{
+padding:15px;
+font-size:1.2rem;
+margin:10px;
+}
+
+.confirm{
+background:#6b46ff;
+color:white;
+margin-top:20px;
+}
+
+.result{
+font-size:1.5rem;
+line-height:2;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="progress">
+<div class="progressBar" id="bar"></div>
+</div>
+
+<!-- PAGE 1 -->
+
+<div class="page active" id="page1">
+
+<h1>Accepter un nouveau date avec Gaëtan ?</h1>
+
+<img src="risitas.png" class="hero">
+
+<div class="buttons">
+
+<button class="btn yes" onclick="nextPage(2)">
+<img src="smiley.png">
+Oui
+</button>
+
+<button class="btn no" id="noBtn">
+Non 🍈
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page" id="page2">
+
+<img src="chat.png" class="cat">
+
+<h1>Sage décision, maintenant il faut choisir où ?</h1>
+
+<div class="choices">
+
+<div class="choice" onclick="selectPlace('🏸 Badminton')">
+🏸 Badminton<br>
+Attention je suis balèze maintenant
+</div>
+
+<div class="choice" onclick="selectPlace('🌅 Labou Lake')">
+🌅 Labou Lake<br>
+les émotions
+</div>
+
+<div class="choice" onclick="selectPlace('❄️ La rando sous la neige')">
+❄️ La rando sous la neige
+</div>
+
+<div class="choice" onclick="selectPlace('🎁 Surprise')">
+🎁 Surprise
+</div>
+
+</div>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page" id="page3">
+
+<img src="starfoullah.png" class="star">
+
+<h1>Et maintenant.. Quand ?</h1>
+
+<input type="date" id="date"><br>
+<input type="time" id="time"><br>
+
+<button class="btn confirm" onclick="validateDate()">
+Confirmer
+</button>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="page" id="page4">
+
+<img src="fillon.png" class="fillon">
+
+<h1>Mais nan la chance, un date avec Gaëtan !</h1>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let place='';
+
+function nextPage(n){
+
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'));
+
+document.getElementById('page'+n)
+.classList.add('active');
+
+document.getElementById('bar').style.width =
+(n*25)+'%';
+}
+
+function selectPlace(p){
+place=p;
+nextPage(3);
+}
+
+function validateDate(){
+
+const d=document.getElementById('date').value;
+const t=document.getElementById('time').value;
+
+document.getElementById('result').innerHTML=
+`
+📍 ${place}<br>
+📅 ${d}<br>
+⏰ ${t}
+`;
+
+nextPage(4);
+}
+
+/* bouton non qui fuit */
+
+const btn=document.getElementById('noBtn');
+
+let x=0;
+let y=0;
+
+document.addEventListener('mousemove',e=>{
+
+const r=btn.getBoundingClientRect();
+
+const cx=r.left+r.width/2;
+const cy=r.top+r.height/2;
+
+const dx=e.clientX-cx;
+const dy=e.clientY-cy;
+
+const dist=Math.sqrt(dx*dx+dy*dy);
+
+if(dist<150){
+
+x-=dx*0.7;
+y-=dy*0.7;
+
+x=Math.max(-350,Math.min(350,x));
+y=Math.max(-180,Math.min(180,y));
+
+btn.style.transform=
+`translate(${x}px,${y}px)`;
+}
+
+});
+
+</script>
+
+</body>
+</html>
+```
