@@ -245,7 +245,7 @@ line-height:2;
     }
 
     .no{
-        position:relative !important;
+        position:absolute !important;
         left:auto !important;
         top:auto !important;
 
@@ -408,7 +408,10 @@ nextPage(4);
 }
 
 /* bouton non qui fuit */
+const btn = document.getElementById("noBtn");
+
 btn.addEventListener("click", (e) => {
+
     e.preventDefault();
 
     const parent = document.querySelector(".buttons");
