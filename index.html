@@ -140,8 +140,9 @@ padding:25px 40px;
 .hero{
 position:absolute;
 right:20px;
-top:120px;
-width:260px;
+top:100px;
+width:220px;
+max-width:30%;
 }
 
 .choices{
@@ -201,7 +202,66 @@ margin-top:20px;
 font-size:1.5rem;
 line-height:2;
 }
+    
+@media (max-width: 768px){
 
+    .card{
+        padding:20px;
+        margin:10px;
+    }
+
+    h1{
+        font-size:2rem;
+        line-height:1.2;
+    }
+
+    .hero{
+        position:relative;
+        display:block;
+        margin:20px auto;
+        top:auto;
+        right:auto;
+        width:180px;
+    }
+
+    .buttons{
+        height:300px;
+    }
+
+    .yes{
+        width:180px;
+        height:70px;
+        font-size:1.5rem;
+    }
+
+    .yes img{
+        height:40px;
+        width:auto;
+    }
+
+    .no{
+        width:180px;
+        height:70px;
+        font-size:1.5rem;
+    }
+
+    .choices{
+        grid-template-columns:1fr;
+    }
+
+    .cat{
+        width:90px;
+    }
+
+    .star{
+        width:180px;
+    }
+
+    .fillon{
+        width:180px;
+    }
+
+}
 </style>
 </head>
 
