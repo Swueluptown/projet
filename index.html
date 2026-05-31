@@ -210,10 +210,10 @@ line-height:2;
     }
 
     h1{
-        font-size:2.2rem;
-        line-height:1.15;
-        text-align:center;
-        margin-bottom:20px;
+    font-size:1.8rem;
+    line-height:1.2;
+    text-align:center;
+    margin-bottom:20px;
     }
 
     .hero{
@@ -285,13 +285,12 @@ line-height:2;
 <!-- PAGE 1 -->
 
 <div class="page active" id="page1">
-
+<img src="risitas.png" class="hero">
 <h1>
 Accepter un nouveau date<br>
 avec Gaëtan ?
 </h1>
 
-<img src="risitas.png" class="hero">
 
 <div class="buttons">
 
@@ -410,17 +409,28 @@ nextPage(4);
 /* bouton non qui fuit */
 const btn = document.getElementById("noBtn");
 
-btn.addEventListener("click", (e) => {
-
-    e.preventDefault();
+function moveNo(){
 
     const parent = document.querySelector(".buttons");
 
     const maxX = parent.clientWidth - btn.offsetWidth;
     const maxY = parent.clientHeight - btn.offsetHeight;
 
-    btn.style.left = Math.random() * maxX + "px";
-    btn.style.top = Math.random() * maxY + "px";
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    moveNo();
+});
+
+btn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNo();
 });
 
 </script>
