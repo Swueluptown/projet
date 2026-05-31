@@ -267,10 +267,8 @@ line-height:2;
     width:180px;
     height:70px;
 
-    left:50%;
+    left:40px;
     top:130px;
-
-    transform:translateX(-50%);
 
     z-index:20;
 }
@@ -456,16 +454,22 @@ function moveNo(){
     void btn.offsetWidth;
     btn.classList.add("flash");
 
-    const parent = document.querySelector(".buttons");
+    const currentTop =
+        parseInt(btn.style.top) || 130;
 
-    const maxX = parent.clientWidth - btn.offsetWidth;
-    const maxY = parent.clientHeight - btn.offsetHeight;
+    let newTop;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    if(currentTop < 100){
+        newTop = 140;
+    }else{
+        newTop = 40;
+    }
 
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
+    const newLeft =
+        40 + Math.random() * 80;
+
+    btn.style.left = newLeft + "px";
+    btn.style.top = newTop + "px";
 }
 
 btn.addEventListener("click", (e) => {
