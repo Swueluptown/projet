@@ -355,14 +355,12 @@ btn.addEventListener("mouseenter", () => {
         btn.offsetHeight -
         20;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+const x = 20 + Math.random() * (maxX - 20);
+const y = 20 + Math.random() * (maxY - 20);
 
     btn.style.left = x + "px";
     btn.style.top = y + "px";
 });
-
-btn.addEventListener("mouseenter", moveNoButton);
 
 </script>
 
