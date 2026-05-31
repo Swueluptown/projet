@@ -408,31 +408,16 @@ nextPage(4);
 }
 
 /* bouton non qui fuit */
-const btn = document.getElementById("noBtn");
-
-btn.addEventListener("mouseenter", () => {
+btn.addEventListener("click", (e) => {
+    e.preventDefault();
 
     const parent = document.querySelector(".buttons");
 
-    const maxX =
-        parent.clientWidth -
-        btn.offsetWidth -
-        20;
+    const maxX = parent.clientWidth - btn.offsetWidth;
+    const maxY = parent.clientHeight - btn.offsetHeight;
 
-    const maxY =
-        parent.clientHeight -
-        btn.offsetHeight -
-        20;
-
-const x = 20 + Math.random() * (maxX - 20);
-const y = 20 + Math.random() * (maxY - 20);
-
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
-
-    btn.addEventListener("touchstart", (e)=>{
-    e.preventDefault();
-    // même logique que mouseenter
+    btn.style.left = Math.random() * maxX + "px";
+    btn.style.top = Math.random() * maxY + "px";
 });
 
 </script>
