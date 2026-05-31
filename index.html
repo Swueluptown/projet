@@ -113,15 +113,28 @@ padding:25px 40px;
 }
 
 .no{
-position:absolute;
-left:420px;
-top:140px;
-width:230px;
-height:90px;
-font-weight:bold;
-background:white;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-transition:transform .45s cubic-bezier(.22,1,.36,1);
+    position:absolute;
+
+    left:520px;
+    top:280px;
+
+    width:180px;
+    height:80px;
+
+    border:none;
+    border-radius:22px;
+
+    background:white;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    font-size:2rem;
+    font-weight:bold;
+
+    transition:
+        left .35s cubic-bezier(.22,1,.36,1),
+        top .35s cubic-bezier(.22,1,.36,1);
+
+    z-index:20;
 }
 
 .hero{
@@ -326,52 +339,38 @@ nextPage(4);
 }
 
 /* bouton non qui fuit */
-const btn = document.getElementById('noBtn');
-const card = document.querySelector('.card');
+const btn = document.getElementById("noBtn");
+const card = document.querySelector(".card");
 
-document.addEventListener('mousemove', e => {
+function moveNoButton(){
 
-    const btnRect = btn.getBoundingClientRect();
     const cardRect = card.getBoundingClientRect();
 
-    const centerX = btnRect.left + btnRect.width/2;
-    const centerY = btnRect.top + btnRect.height/2;
+    const padding = 30;
 
-    const dx = e.clientX - centerX;
-    const dy = e.clientY - centerY;
+    const maxX =
+        cardRect.width -
+        btn.offsetWidth -
+        padding;
 
-    const dist = Math.sqrt(dx*dx + dy*dy);
+    const maxY =
+        cardRect.height -
+        btn.offsetHeight -
+        120;
 
-    if(dist < 140){
+    const newX =
+        padding +
+        Math.random() * (maxX - padding);
 
-        const angle = Math.atan2(dy,dx);
+    const newY =
+        100 +
+        Math.random() * (maxY - 100);
 
-        let moveX = -Math.cos(angle) * 120;
-        let moveY = -Math.sin(angle) * 120;
+    btn.style.left = newX + "px";
+    btn.style.top = newY + "px";
+}
 
-        let newLeft = btn.offsetLeft + moveX;
-        let newTop = btn.offsetTop + moveY;
-
-        newLeft = Math.max(
-            20,
-            Math.min(
-                card.clientWidth - btn.offsetWidth - 20,
-                newLeft
-            )
-        );
-
-        newTop = Math.max(
-            80,
-            Math.min(
-                card.clientHeight - btn.offsetHeight - 20,
-                newTop
-            )
-        );
-
-        btn.style.left = newLeft + 'px';
-        btn.style.top = newTop + 'px';
-    }
-});
+btn.addEventListener("mouseenter", moveNoButton);
 
 </script>
 
