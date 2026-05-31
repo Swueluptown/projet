@@ -89,15 +89,27 @@ padding:25px 40px;
 }
 
 .yes{
-    width:180px;
-    height:75px;
-    font-size:1.8rem;
+    width:220px;
+    height:90px;
+
+    background:#6b46ff;
+    color:white;
+
+    border:none;
+
+    border-radius:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+
+    font-size:2rem;
 }
 
 .yes img{
-    width:35px;
-    height:100px;
-    font-size:2.2rem;
+    height:55px;
+    width:auto;
 }
 
 .no{
@@ -314,51 +326,51 @@ nextPage(4);
 }
 
 /* bouton non qui fuit */
+const btn = document.getElementById('noBtn');
+const card = document.querySelector('.card');
 
-const btn=document.getElementById('noBtn');
+document.addEventListener('mousemove', e => {
 
-let x=0;
-let y=0;
+    const btnRect = btn.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
 
-document.addEventListener('mousemove',e=>{
+    const centerX = btnRect.left + btnRect.width/2;
+    const centerY = btnRect.top + btnRect.height/2;
 
-const r=btn.getBoundingClientRect();
+    const dx = e.clientX - centerX;
+    const dy = e.clientY - centerY;
 
-const cx=r.left+r.width/2;
-const cy=r.top+r.height/2;
+    const dist = Math.sqrt(dx*dx + dy*dy);
 
-const dx=e.clientX-cx;
-const dy=e.clientY-cy;
+    if(dist < 140){
 
-const dist=Math.sqrt(dx*dx+dy*dy);
+        const angle = Math.atan2(dy,dx);
 
-if(dist<150){
+        let moveX = -Math.cos(angle) * 120;
+        let moveY = -Math.sin(angle) * 120;
 
-x-=dx*0.7;
-y-=dy*0.7;
+        let newLeft = btn.offsetLeft + moveX;
+        let newTop = btn.offsetTop + moveY;
 
-const margin = 50;
+        newLeft = Math.max(
+            20,
+            Math.min(
+                card.clientWidth - btn.offsetWidth - 20,
+                newLeft
+            )
+        );
 
-const maxX =
-window.innerWidth - r.width - margin;
+        newTop = Math.max(
+            80,
+            Math.min(
+                card.clientHeight - btn.offsetHeight - 20,
+                newTop
+            )
+        );
 
-const maxY =
-window.innerHeight - r.height - margin;
-
-x = Math.max(
-    -r.left + margin,
-    Math.min(maxX - r.left, x)
-);
-
-y = Math.max(
-    -r.top + margin,
-    Math.min(maxY - r.top, y)
-);
-
-btn.style.transform=
-`translate(${x}px,${y}px)`;
-}
-
+        btn.style.left = newLeft + 'px';
+        btn.style.top = newTop + 'px';
+    }
 });
 
 </script>
