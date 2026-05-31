@@ -89,15 +89,13 @@ padding:25px 40px;
 }
 
 .yes{
-background:#6b46ff;
-color:white;
-display:flex;
-align-items:center;
-gap:15px;
+    width:180px;
+    height:75px;
+    font-size:1.8rem;
 }
 
 .yes img{
-    width:230px;
+    width:35px;
     height:100px;
     font-size:2.2rem;
 }
@@ -105,7 +103,7 @@ gap:15px;
 .no{
 position:absolute;
 left:420px;
-top:0;
+top:140px;
 width:230px;
 height:90px;
 font-weight:bold;
@@ -116,9 +114,9 @@ transition:transform .45s cubic-bezier(.22,1,.36,1);
 
 .hero{
 position:absolute;
-right:40px;
+right:20px;
 top:120px;
-width:180px;
+width:260px;
 }
 
 .choices{
@@ -339,8 +337,23 @@ if(dist<150){
 x-=dx*0.7;
 y-=dy*0.7;
 
-x=Math.max(-350,Math.min(350,x));
-y=Math.max(-180,Math.min(180,y));
+const margin = 50;
+
+const maxX =
+window.innerWidth - r.width - margin;
+
+const maxY =
+window.innerHeight - r.height - margin;
+
+x = Math.max(
+    -r.left + margin,
+    Math.min(maxX - r.left, x)
+);
+
+y = Math.max(
+    -r.top + margin,
+    Math.min(maxY - r.top, y)
+);
 
 btn.style.transform=
 `translate(${x}px,${y}px)`;
