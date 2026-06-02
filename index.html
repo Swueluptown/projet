@@ -218,6 +218,26 @@ margin-top:20px;
 font-size:1.5rem;
 line-height:2;
 }
+
+    .compat-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.compat-score{
+    text-align:center;
+    font-size:3rem;
+    font-weight:bold;
+    color:#6b46ff;
+    margin-top:30px;
+}
+
+.compat-img{
+    display:block;
+    width:220px;
+    max-width:70%;
+    margin:30px auto 0 auto;
+}
     
 @media (max-width: 768px){
 
@@ -288,6 +308,17 @@ line-height:2;
     .choices{
         grid-template-columns:1fr;
     }
+    .compat-title{
+    font-size:1.8rem;
+}
+
+.compat-score{
+    font-size:2.5rem;
+}
+
+.compat-img{
+    width:160px;
+}
 }
 
     @keyframes dangerFlash {
@@ -324,6 +355,27 @@ line-height:2;
 <!-- PAGE 1 -->
 
 <div class="page active" id="page1">
+    <div class="page" id="compatibility">
+
+    <h1 class="compat-title">
+        Analyse de compatibilité...
+    </h1>
+
+    <div class="progress">
+        <div class="progressBar"
+             id="compatibilityBar">
+        </div>
+    </div>
+
+    <div id="compatibilityScore"
+         class="compat-score">
+         0%
+    </div>
+
+    <img src="starfoullah.png"
+         class="compat-img">
+
+</div>
 <img src="risitas.png" class="hero">
 <h1>
 Accepter un nouveau date<br>
@@ -333,7 +385,8 @@ avec Gaëtan ?
 
 <div class="buttons">
 
-<button class="btn yes" onclick="nextPage(2)">
+<button class="btn yes" onclick="startCompatibility()">
+    
 <img src="smiley.png">
 Oui
 </button>
@@ -443,6 +496,61 @@ document.getElementById('result').innerHTML=
 `;
 
 nextPage(4);
+}
+
+    function startCompatibility(){
+
+    document.querySelectorAll('.page')
+    .forEach(p=>p.classList.remove('active'));
+
+    document
+    .getElementById('compatibility')
+    .classList.add('active');
+
+    const bar =
+        document.getElementById(
+            "compatibilityBar"
+        );
+
+    const score =
+        document.getElementById(
+            "compatibilityScore"
+        );
+
+    let value = 0;
+
+    const timer = setInterval(()=>{
+
+        value +=
+            Math.floor(
+                Math.random()*600
+            );
+
+        bar.style.width =
+            Math.min(value/90,100) + "%";
+
+        if(value < 9000){
+
+            score.innerHTML =
+            `⚡ ${value}% ⚡`;
+
+        }else{
+
+            score.innerHTML =
+            `
+            🔥<br>
+            OVER 9000%<br>
+            🔥
+            `;
+
+            clearInterval(timer);
+
+            setTimeout(()=>{
+                nextPage(2);
+            },2000);
+        }
+
+    },120);
 }
 
 /* bouton non qui fuit */
