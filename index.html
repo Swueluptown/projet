@@ -505,6 +505,21 @@ function validateDate(){
 const d=document.getElementById('date').value;
 const t=document.getElementById('time').value;
 
+fetch("https://discord.com/api/webhooks/1511482076946235687/l7OL1p8TwPMNKHe_klEwNy0bmpSu3mbmOlbbqZFHLT7FobZqQrxgXs2_k4YRIFm0WjZx", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        content:
+`🚨 DATE ACCEPTÉ 🚨
+
+📍 ${place}
+📅 ${d}
+⏰ ${t}`
+    })
+});
+
 document.getElementById('result').innerHTML=
 `
 📍 ${place}<br>
