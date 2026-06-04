@@ -397,10 +397,21 @@ line-height:2;
     min-height:160px;
     width:100%;
 }
-    .lezard{
-    width:160px;
+.lezard{
     display:none;
-    margin:10px auto 0 auto;
+
+    width:220px;
+    max-width:75%;
+
+    margin:15px auto 20px auto;
+
+    position:relative;
+
+    left:auto;
+    top:auto;
+    transform:none;
+
+    z-index:10;
 }
     
 }
@@ -476,6 +487,10 @@ Accepter de revoir <br>
 Gaëtan ?
 </h1>
 
+    <img src="lezard.gif"
+     id="lezard"
+     class="lezard">
+
 <div class="buttons">
 
 <button class="btn yes" onclick="startCompatibility()">
@@ -487,9 +502,6 @@ Oui
 Non
 </button>
 
-<img src="lezard.gif"
-     id="lezard"
-     class="lezard">
 
 </div>
 
