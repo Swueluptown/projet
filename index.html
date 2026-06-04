@@ -258,6 +258,20 @@ line-height:2;
 
     min-height:180px;
 }
+    .lezard{
+    display:none;
+
+    position:absolute;
+
+    width:90px;
+
+    left:50%;
+    top:190px;
+
+    transform:translateX(-50%);
+
+    z-index:5;
+}
     
 @media (max-width: 768px){
 
@@ -322,6 +336,12 @@ line-height:2;
     display:block;
     margin:0 auto 20px auto;
     width:120px;
+    
+    .lezard{
+    display:none;
+    width:120px;
+    margin:15px auto 0 auto;
+}
 }
 
 .star{
@@ -367,6 +387,12 @@ line-height:2;
     min-height:160px;
     width:100%;
 }
+    .lezard{
+    width:100px;
+    display:none;
+    margin:10px auto 0 auto;
+}
+    
 }
 
     @keyframes dangerFlash {
@@ -450,6 +476,10 @@ Oui
 <button class="btn no" id="noBtn">
 Non
 </button>
+
+<img src="lezard.gif"
+     id="lezard"
+     class="lezard">
 
 </div>
 
@@ -671,9 +701,16 @@ setInterval(()=>{
 }
 
 /* bouton non qui fuit */
+    let nonClicks = 0;
 const btn = document.getElementById("noBtn");
 
 function moveNo(){
+
+    nonClicks++;
+
+    if(nonClicks >= 2){
+        document.getElementById("lezard").style.display = "block";
+    }
 
     btn.classList.remove("flash");
     void btn.offsetWidth;
